@@ -21,7 +21,7 @@ const NotFound = () => {
           We can&#8217;t find the page you are looking for
         </Text>
         <NavLink to={"/"}>
-          <Button color="purple.3">Go Home</Button>
+          <Button>Go Home</Button>
         </NavLink>
       </Flex>
     </Flex>

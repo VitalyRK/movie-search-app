@@ -1,7 +1,7 @@
-import { Title } from "@mantine/core";
+import SearchListFrame from "../../components/search-list/SearchListFrame";
 
 function SearchPage() {
-  return <Title order={1}>Movies</Title>;
+  return <SearchListFrame />;
 }
 
 export default SearchPage;

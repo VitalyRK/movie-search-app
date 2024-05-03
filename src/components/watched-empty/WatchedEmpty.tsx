@@ -15,7 +15,7 @@ const WatchedEmpty = () => {
         You haven&#8217;t rated any films yet
       </Text>
       <NavLink to={"/"}>
-        <Button color="purple.3">Find movies</Button>
+        <Button>Find movies</Button>
       </NavLink>
     </Flex>
   );

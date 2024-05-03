@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import WatchedEmpty from "../../components/watched-empty/WatchedEmpty";
+import WatchedList from "../../components/watched-list/WatchedList";
 
 interface IWatchedList {
   title: string;
@@ -18,7 +19,7 @@ function WatchedPage() {
     if (value) setWatchedList(JSON.parse(value));
   }, []);
 
-  return <>{watchedList ? <WatchedEmpty /> : "Watched movies"}</>;
+  return <>{watchedList ? <WatchedEmpty /> : <WatchedList />}</>;
 }
 
 export default WatchedPage;

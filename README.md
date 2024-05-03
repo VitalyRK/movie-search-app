@@ -2,4 +2,4 @@
 
 Search for movies test task
 
-Stack: **NextJS**, **Mantine** library
+Stack: **React**, **Mantine** library

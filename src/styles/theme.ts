@@ -1,6 +1,13 @@
-import { createTheme } from "@mantine/core";
+import { Button, createTheme } from "@mantine/core";
 
 export const theme = createTheme({
+  breakpoints: {
+    xs: "320px",
+    sm: "560px",
+    md: "800px",
+    lg: "1440px",
+    xl: "90em",
+  },
   cursorType: "pointer",
   fontFamily: '"Inter", sans-serif',
   colors: {
@@ -43,6 +50,19 @@ export const theme = createTheme({
         fontWeight: "600",
         lineHeight: "140%",
       },
+      h3: {
+        fontSize: "20px",
+        fontWeight: "600",
+        lineHeight: "24px",
+      },
     },
+  },
+  components: {
+    Button: Button.extend({
+      defaultProps: {
+        p: "10px 20px",
+        color: "purple.3",
+      },
+    }),
   },
 });
