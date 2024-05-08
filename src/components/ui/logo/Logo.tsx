@@ -8,7 +8,7 @@ function Logo() {
       <NavLink to={"/"}>
         <Title
           order={2}
-          c={"customColors.3"}
+          c={"customColors.2"}
           style={{ fontFamily: "Poppins, sans-serif" }}
         >
           ArrowFlicks

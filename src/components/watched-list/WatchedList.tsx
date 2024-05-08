@@ -1,17 +1,20 @@
 import { Grid, Title } from "@mantine/core";
-import MovieCard from "./MovieCard";
-import { useEffect } from "react";
-import { BASE_URL, FIXED_PARAMS } from "../../helpers/constants";
+import MovieCard from "../ui/movie-card/MovieCard";
+import { useEffect, useState } from "react";
+import { BASE_URL, FIXED_PARAMS_URL } from "../../helpers/constants";
+import { IMovieResults } from "../../helpers/types";
 
 interface WatchedListProps {
   name?: string;
 }
 
 const WatchedList = ({ name }: WatchedListProps) => {
+  const [data, setData] = useState<IMovieResults | null>(null);
+
   useEffect(() => {
     const url =
       BASE_URL +
-      FIXED_PARAMS +
+      FIXED_PARAMS_URL +
       `&page=1&sort_by=popularity.desc&with_genres=35&with_text_query=batman`;
     const options = {
       method: "GET",
@@ -24,17 +27,26 @@ const WatchedList = ({ name }: WatchedListProps) => {
 
     fetch(url, options)
       .then((res) => res.json())
-      .then((json) => console.log(json))
+      .then((json) => {
+        setData(json);
+      })
+      .then(() => {})
       .catch((err) => console.error("error:" + err));
   }, []);
+
+  console.log(data);
+
   return (
     <>
       <Title order={1}>Watched movies</Title>
+
       <Grid gutter={{ base: "16px" }}>
-        <Grid.Col span={{ base: 12, xl: 6 }}>
-          <MovieCard name={"The Green Mile"} />
-        </Grid.Col>
-        <Grid.Col span={{ base: 12, xl: 6 }}>
+        {data && (
+          <Grid.Col span={{ base: 12, xl: 6 }}>
+            <MovieCard movie_data={data.results[0]} />
+          </Grid.Col>
+        )}
+        {/* <Grid.Col span={{ base: 12, xl: 6 }}>
           <MovieCard name={"test"} />
         </Grid.Col>
         <Grid.Col span={{ base: 12, xl: 6 }}>
@@ -42,7 +54,7 @@ const WatchedList = ({ name }: WatchedListProps) => {
         </Grid.Col>
         <Grid.Col span={{ base: 12, xl: 6 }}>
           <MovieCard name={"test"} />
-        </Grid.Col>
+        </Grid.Col> */}
       </Grid>
     </>
   );

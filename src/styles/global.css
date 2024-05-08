@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:wght@600&display=swap');
 
 :root {
-  line-height: 1.5;
   font-weight: 400;
 
   font-synthesis: none;
@@ -18,7 +17,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  transition: color 0.3s, background-color 0.3s;
+  transition: color 0.3s, background-color 0.3s ease;
 }
 
 html,
@@ -26,6 +25,7 @@ body {
   max-width: 100vw;
   height: 100dvh;
   overflow-x: hidden;
+  color: #232134;
 }
 
 ::selection {
@@ -37,7 +37,9 @@ a {
   text-decoration: none;
 }
 
-.navButton {
+/* ============ Nav Buttons ============ */
+
+.nav__button {
   width: 100%;
   text-align: left;
   font-weight: 500;
@@ -48,12 +50,64 @@ a {
   cursor: pointer;
 }
 
-.activeNavButton button {
+.active__nav__button button {
   font-weight: 700;
   background-color: #E5D5FA;
   color: #9854F6;
 }
 
-.inactiveNavButton button:hover {
+.inactive__nav__button button:hover {
+  color: #BD93F7;
+}
+
+.inactive__nav__button button:active {
   background-color: #E5D5FA;
+  color: #9854F6;
+}
+
+/* ============ Reset buttons ============ */
+
+.interactive__button {
+  transition: .1s ease;
+}
+
+.interactive__button:hover {
+  color: #BD93F7;
+}
+
+.interactive__button:active {
+  color: #541F9D;
+}
+
+/* ============ Primary buttons ============ */
+
+.primary__button {
+  transition: .3s ease;
+}
+
+.primary__button:hover {
+  background-color: #BD93F7;
+}
+
+.primary__button:active {
+  background-color: #541F9D;
+}
+
+/* ============ Search input ============ */
+
+.interactive__input input {
+  border-color: #D5D6DC;
+  transition: .3s ease;
+}
+
+.interactive__input input:hover {
+  border-color: #9854F6;
+}
+
+.interactive__input input:focus {
+  border-color: #9854F6;
+}
+
+.interactive__input input:active {
+  border-color: #EAEBED;
 }

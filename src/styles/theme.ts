@@ -1,42 +1,42 @@
-import { Button, createTheme } from "@mantine/core";
+import { Button, TextInput, createTheme } from "@mantine/core";
 
 export const theme = createTheme({
   breakpoints: {
     xs: "320px",
     sm: "560px",
     md: "800px",
-    lg: "1440px",
-    xl: "90em",
+    lg: "1165px",
+    xl: "1440px",
   },
   cursorType: "pointer",
   fontFamily: '"Inter", sans-serif',
   colors: {
     customColors: [
-      "#F5F5F6", // bg main
-      "#F2EBF9", // bg nav
-      "#E5D5FA", // purple hover
-      "#9854F6", // main color
-      "#FAB005", // stars
-      "#000000", // text black
-      "#7B7C88", // text gray
-      "#ACADB9", // playceholder
-      "#D5D6DC", // gray line
-      "#EAEBED", // gray line inactive
+      "#FFFFFF", // White
+      "#F2EBF9", // Purple 100 Background
+      "#9854F6", // Purple 500 Main
+      "#FAB005", // Yellow
+      "#F5F5F6", // Grey 100
+      "#EAEBED", // Grey 200
+      "#D5D6DC", // Grey 300
+      "#ACADB9", // Grey 500
+      "#7B7C88", // Grey 600
+      "#232134", // Black
     ],
-    purple: [
-      "#F2EBF9",
-      "#E5D5FA",
-      "#beabf0",
-      "#9854F6",
-      "#7c56de",
-      "#683dd9",
-      "#5f2fd8",
-      "#4f23c0",
+    purpleMain: [
+      "#F2ECFA", // Purple 100
+      "#E5D5FA", // Purple 200
+      "#D1B4F8", // Purple 300
+      "#BD93F7", // Purple 400
+      "#9854F6", // Purple 500
+      "#541F9D", // Purple 600
+      "#9854F6", // Purple 500 Main
+      "#BD93F7", // Purple 400 Hover
       "#451eac",
       "#3a1899",
     ],
   },
-  primaryColor: "purple",
+  primaryColor: "purpleMain",
   headings: {
     fontFamily: '"Inter", sans-serif',
     sizes: {
@@ -55,14 +55,16 @@ export const theme = createTheme({
         fontWeight: "600",
         lineHeight: "24px",
       },
-    },
-  },
-  components: {
-    Button: Button.extend({
-      defaultProps: {
-        p: "10px 20px",
-        color: "purple.3",
+      h4: {
+        fontSize: "20px",
+        fontWeight: "700",
+        lineHeight: "20px",
       },
-    }),
+      h5: {
+        fontSize: "16px",
+        fontWeight: "700",
+        lineHeight: "140%",
+      },
+    },
   },
 });

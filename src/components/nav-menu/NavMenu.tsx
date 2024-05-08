@@ -1,30 +1,18 @@
 import { Stack } from "@mantine/core";
-import { NavLink } from "react-router-dom";
 import NavButton from "./NavButton";
-import Logo from "../logo/Logo";
+import Logo from "../ui/logo/Logo";
 
-function NavMenu() {
+interface NavMenuProps {
+  onClose: () => void;
+}
+
+function NavMenu({ onClose: close }: NavMenuProps) {
   return (
     <>
       <Logo />
       <Stack gap={16} mt={80}>
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive ? "activeNavButton" : "inactiveNavButton"
-          }
-        >
-          <NavButton title="Movies" />
-        </NavLink>
-
-        <NavLink
-          to="/watched"
-          className={({ isActive }) =>
-            isActive ? "activeNavButton" : "inactiveNavButton"
-          }
-        >
-          <NavButton title="Rated movies" />
-        </NavLink>
+        <NavButton onClose={close} path="/" title="Movies" />
+        <NavButton onClose={close} path="/watched" title="Rated movies" />
       </Stack>
     </>
   );

@@ -1,8 +1,12 @@
+import { Stack } from "@mantine/core";
+
+import DetailMovie from "../../components/detail-movie/DetailMovie";
+
 function DetailPage() {
   return (
-    <div>
-      <h1>DetailPage</h1>
-    </div>
+    <Stack gap={20} h={"100%"} w={{ base: "100%", lg: 800 }}>
+      <DetailMovie />
+    </Stack>
   );
 }
 

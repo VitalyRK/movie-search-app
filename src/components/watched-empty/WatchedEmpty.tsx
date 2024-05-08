@@ -10,8 +10,13 @@ const WatchedEmpty = () => {
       justify={"center"}
       align={"center"}
     >
-      <Image src="/not-rated.png" w={400} h={300} alt="not rated films" />
-      <Text size="24px" fw={600} lh={"24px"}>
+      <Image
+        src="/not-rated.png"
+        w={{ base: 300, sm: 400 }}
+        h={300}
+        alt="not rated films"
+      />
+      <Text ta="center" size="24px" fw={600} lh={"24px"}>
         You haven&#8217;t rated any films yet
       </Text>
       <NavLink to={"/"}>
