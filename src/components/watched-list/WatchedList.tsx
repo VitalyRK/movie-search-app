@@ -8,7 +8,7 @@ interface WatchedListProps {
   name?: string;
 }
 
-const WatchedList = ({ name }: WatchedListProps) => {
+const WatchedList = ({}: WatchedListProps) => {
   const [data, setData] = useState<IMovieResults | null>(null);
 
   useEffect(() => {
