@@ -23,7 +23,7 @@ interface FilterPanelProps {
 function FilterPanel({ onReset }: FilterPanelProps) {
   const form = useSearchFormContext();
   const [isOpenGenresPicker, setIsOpenGenresPicker] = useState(false);
-  const [isOpenYearPicker, setIsOpenYearPicker] = useState(false);
+  const [isOpenYearPicker, _] = useState(false);
   const disabledFiltersButton =
     form.getValues().genres.length === 0 &&
     form.getValues().releaseYear === null &&

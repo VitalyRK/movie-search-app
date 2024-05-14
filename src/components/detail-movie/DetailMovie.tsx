@@ -7,7 +7,6 @@ import BreadcrumbsMovie from "./BreadcrumbsMovie";
 import LoaderCenter from "../ui/loader/LoaderCenter";
 import BasicDataCard from "./BasicDataCard";
 import AdditionalDataMovie from "./AdditionalDataMovie";
-import { useMediaQuery } from "@mantine/hooks";
 
 function DetailMovie() {
   const { id: idParam } = useParams();

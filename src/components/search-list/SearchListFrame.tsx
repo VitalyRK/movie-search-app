@@ -1,4 +1,4 @@
-import { Grid, Image, Pagination, Title } from "@mantine/core";
+import { Grid, Pagination } from "@mantine/core";
 import MovieCard from "../ui/movie-card/MovieCard";
 import SearchPanel from "./control/SearchPanel";
 import FilterPanel from "./control/FilterPanel";
