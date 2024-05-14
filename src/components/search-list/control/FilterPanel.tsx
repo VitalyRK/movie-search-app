@@ -1,16 +1,34 @@
-import { Box, Button, Flex, Group, MultiSelect, Select } from "@mantine/core";
-import { LIMIT_OF_RATES, genresList } from "../../../helpers/constants";
+import {
+  Box,
+  Button,
+  Flex,
+  Group,
+  MultiSelect,
+  NumberInput,
+  Image,
+} from "@mantine/core";
+import { genresList } from "../../../helpers/constants";
 import { YearPickerInput } from "@mantine/dates";
 import ArrowDownIcon from "../../ui/arrow-down-icon/ArrowDownIcon";
 import { useSearchFormContext } from "../context/FormContext";
+import classes from "./index.module.css";
+import { ISearchFormValues } from "../../../helpers/types";
+import { useState } from "react";
+import ArrowUpIcon from "../../ui/arrow-up-icon/ArrowUpIcon";
 
-function FilterPanel() {
+interface FilterPanelProps {
+  onReset: (searchFormData: ISearchFormValues) => Promise<void>;
+}
+
+function FilterPanel({ onReset }: FilterPanelProps) {
   const form = useSearchFormContext();
+  const [isOpenGenresPicker, setIsOpenGenresPicker] = useState(false);
+  const [isOpenYearPicker, setIsOpenYearPicker] = useState(false);
   const disabledFiltersButton =
     form.getValues().genres.length === 0 &&
     form.getValues().releaseYear === null &&
-    form.getValues().voteAverageGte === null &&
-    form.getValues().voteAverageLte === null;
+    form.getValues().voteAverageGte === "" &&
+    form.getValues().voteAverageLte === "";
 
   return (
     <Flex
@@ -36,13 +54,14 @@ function FilterPanel() {
         styles={{
           error: { position: "absolute", top: 6, right: 0 },
         }}
-        placeholder="Select genre"
+        placeholder={form.getValues().genres.length > 0 ? "" : "Select genre"}
         data={genresList}
-        clearable
-        hidePickedOptions
-        rightSection={<ArrowDownIcon />}
+        withCheckIcon={false}
+        onDropdownOpen={() => setIsOpenGenresPicker(!isOpenGenresPicker)}
+        onDropdownClose={() => setIsOpenGenresPicker(!isOpenGenresPicker)}
+        rightSection={!isOpenGenresPicker ? <ArrowDownIcon /> : <ArrowUpIcon />}
         maxValues={4}
-        className="interactive__input"
+        className={"interactive__input"}
       />
 
       <YearPickerInput
@@ -59,15 +78,15 @@ function FilterPanel() {
           },
         }}
         minDate={new Date(1925, 1)}
-        maxDate={new Date(2025, 1)}
+        maxDate={new Date(2030, 1)}
         placeholder="Select release year"
-        rightSection={<ArrowDownIcon />}
+        rightSection={!isOpenYearPicker ? <ArrowDownIcon /> : <ArrowUpIcon />}
         clearable
+        classNames={{ input: classes.input }}
       />
-      <Group gap={8} style={{ alignSelf: "start" }}>
-        <Select
+      <Group gap={8} h={72} style={{ alignSelf: "start" }}>
+        <NumberInput
           {...form.getInputProps("voteAverageGte")}
-          w={137}
           label="Ratings"
           labelProps={{
             style: {
@@ -77,20 +96,15 @@ function FilterPanel() {
               marginBottom: "8px",
             },
           }}
-          placeholder="From"
-          data={
-            form.getValues().voteAverageLte
-              ? Array.from(
-                  { length: Number(form.getValues().voteAverageLte) - 1 },
-                  (_, i) => (i + 1).toString()
-                )
-              : Array.from({ length: LIMIT_OF_RATES }, (_, i) => i.toString())
-          }
-          clearable
-        />
-        <Select
-          {...form.getInputProps("voteAverageLte")}
+          rightSection={<Image src={"./dropdown.svg"} />}
           w={137}
+          h={72}
+          placeholder="From"
+          decimalScale={1}
+          className={"interactive__input"}
+        />
+        <NumberInput
+          {...form.getInputProps("voteAverageLte")}
           label="Ratings"
           labelProps={{
             style: {
@@ -101,41 +115,32 @@ function FilterPanel() {
               marginBottom: "8px",
             },
           }}
+          rightSection={<Image src={"./dropdown.svg"} />}
+          w={137}
+          h={72}
           placeholder="To"
-          data={
-            form.getValues().voteAverageGte
-              ? Array.from(
-                  {
-                    length:
-                      LIMIT_OF_RATES - Number(form.getValues().voteAverageGte),
-                  },
-                  (_, i) =>
-                    (i + Number(form.getValues().voteAverageGte) + 1).toString()
-                )
-              : Array.from({ length: LIMIT_OF_RATES }, (_, i) =>
-                  (i + 1).toString()
-                )
-          }
-          clearable
+          decimalScale={1}
+          className={"interactive__input"}
         />
       </Group>
 
       <Box h={67} style={{ display: "flex", alignItems: "end" }}>
         <Button
-          style={{ fontWeight: 500 }}
+          style={{ fontWeight: 500, backgroundColor: "transparent" }}
           p={0}
           className={disabledFiltersButton ? "" : "interactive__button"}
           variant="transparent"
           disabled={disabledFiltersButton}
-          onClick={() =>
+          onClick={() => {
             form.setValues((prev) => ({
               ...prev,
               genres: [],
               releaseYear: null,
-              voteAverageGte: null,
-              voteAverageLte: null,
-            }))
-          }
+              voteAverageGte: "",
+              voteAverageLte: "",
+            }));
+            onReset(form.getValues());
+          }}
         >
           Reset filters &#10006;
         </Button>

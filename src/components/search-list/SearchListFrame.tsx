@@ -1,4 +1,4 @@
-import { Grid, Image } from "@mantine/core";
+import { Grid, Image, Pagination, Title } from "@mantine/core";
 import MovieCard from "../ui/movie-card/MovieCard";
 import SearchPanel from "./control/SearchPanel";
 import FilterPanel from "./control/FilterPanel";
@@ -12,6 +12,8 @@ import {
 } from "../../helpers/types";
 import { SearchFormProvider, useSearchForm } from "./context/FormContext";
 import LoaderCenter from "../ui/loader/LoaderCenter";
+import { useMediaQuery } from "@mantine/hooks";
+import NothingFound from "../ui/nothing-found/NothingFound";
 
 const SearchListFrame = () => {
   const searchForm = useSearchForm({
@@ -19,8 +21,8 @@ const SearchListFrame = () => {
       searchField: "",
       genres: [],
       releaseYear: null,
-      voteAverageGte: null,
-      voteAverageLte: null,
+      voteAverageGte: "",
+      voteAverageLte: "",
       sortBy: "popularity.desc",
       page: null,
     },
@@ -29,11 +31,26 @@ const SearchListFrame = () => {
     validate: {
       genres: (value) =>
         value.length > 3 ? "You can select maximum three" : null,
+      voteAverageGte: (value) =>
+        Number(value) < 0
+          ? "Must be greater than or equal to 0"
+          : Number(value) > 10
+          ? "Must be less than or equal to 10"
+          : null,
+      voteAverageLte: (value) =>
+        Number(value) < 0
+          ? "Must be greater than or equal to 0"
+          : Number(value) > 10
+          ? "Must be less than or equal to 10"
+          : null,
     },
   });
+  const isMobile = useMediaQuery("(max-width: 800px)");
+
   const [dataMovies, setDataMovies] = useState<IMovieResults | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const sortBy = searchForm.getValues().sortBy;
+  const page = searchForm.getValues().page;
 
   const refreshData = async (searchFormData: ISearchFormValues) => {
     setIsLoading(true);
@@ -61,35 +78,50 @@ const SearchListFrame = () => {
         throw new Error("Error");
       }
     })();
-  }, [sortBy]);
+  }, [sortBy, page]);
 
   return (
     <SearchFormProvider form={searchForm}>
       <form
+        style={{ width: "100%" }}
         onSubmit={searchForm.onSubmit((data) => {
           refreshData(data);
         })}
       >
         <SearchPanel />
-        <FilterPanel />
+        <FilterPanel onReset={refreshData} />
         <SortPanel />
       </form>
       {isLoading ? (
         <LoaderCenter />
       ) : (
-        <Grid gutter={{ base: "16px" }}>
-          {dataMovies &&
-            dataMovies.results.map((movie, id) => {
-              return (
-                <Grid.Col key={`card-${id}`} span={{ base: 12, xl: 6 }}>
-                  <MovieCard movie_data={movie} />
-                </Grid.Col>
-              );
-            }, [])}
-          {dataMovies?.results.length === 0 && (
-            <Image src={"./nothing-found.png"} />
+        <>
+          <Grid style={{ gridTemplateRows: "1fr" }} gutter={{ base: "16px" }}>
+            {dataMovies &&
+              dataMovies.results.map((movie, id) => {
+                return (
+                  <Grid.Col key={`card-${id}`} span={{ base: 12, xl: 6 }}>
+                    <MovieCard movie_data={movie} />
+                  </Grid.Col>
+                );
+              }, [])}
+            {dataMovies?.results.length === 0 && <NothingFound />}
+          </Grid>
+          {dataMovies && dataMovies.total_pages > 1 && (
+            <Pagination
+              style={{ alignSelf: isMobile ? "center" : "end" }}
+              size={isMobile ? "xs" : "sm"}
+              total={dataMovies.total_pages}
+              value={page || 1}
+              onChange={(page) => {
+                searchForm.setValues((prev) => ({
+                  ...prev,
+                  page,
+                }));
+              }}
+            />
           )}
-        </Grid>
+        </>
       )}
     </SearchFormProvider>
   );

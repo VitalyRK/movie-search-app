@@ -94,20 +94,62 @@ a {
 }
 
 /* ============ Search input ============ */
-
+.mantine-Input-input.mantine-MultiSelect-input,
 .interactive__input input {
   border-color: #D5D6DC;
   transition: .3s ease;
 }
 
+.mantine-Input-input.mantine-MultiSelect-input:hover,
 .interactive__input input:hover {
   border-color: #9854F6;
 }
 
+.mantine-Input-input.mantine-MultiSelect-input:focus,
 .interactive__input input:focus {
   border-color: #9854F6;
 }
 
+.mantine-Input-input.mantine-MultiSelect-input:active,
 .interactive__input input:active {
   border-color: #EAEBED;
+}
+
+.mantine-Pagination-control,
+.mantine-MultiSelect-option,
+.mantine-YearPickerInput-calendarHeaderControl.mantine-UnstyledButton-root,
+.mantine-YearPickerInput-calendarHeaderLevel.mantine-UnstyledButton-root,
+.mantine-YearPickerInput-yearsListControl.mantine-PickerControl-pickerControl.mantine-UnstyledButton-root {
+  transition: .3s ease;
+}
+
+.mantine-Pagination-control:hover,
+.mantine-MultiSelect-option:hover,
+.mantine-YearPickerInput-calendarHeaderControl.mantine-UnstyledButton-root:hover,
+.mantine-YearPickerInput-calendarHeaderLevel.mantine-UnstyledButton-root:hover,
+.mantine-YearPickerInput-yearsListControl.mantine-PickerControl-pickerControl.mantine-UnstyledButton-root:hover {
+  color: #232134;
+  background-color: var(--mantine-color-customColors-1);
+}
+
+.mantine-MultiSelect-option:active,
+.mantine-YearPickerInput-calendarHeaderControl.mantine-UnstyledButton-root:active,
+.mantine-YearPickerInput-calendarHeaderLevel.mantine-UnstyledButton-root:active,
+.mantine-YearPickerInput-yearsListControl.mantine-PickerControl-pickerControl.mantine-UnstyledButton-root:active {
+  color: var(--mantine-color-customColors-0);
+  background-color: var(--mantine-color-purpleMain-filled);
+}
+
+[data-checked="true"] {
+  color: var(--mantine-color-customColors-0);
+  background-color: var(--mantine-color-purpleMain-filled);
+}
+
+.mantine-MultiSelect-pill {
+  padding: 0;
+  background-color: transparent;
+}
+
+.mantine-MultiSelect-pill button {
+  display: none;
 }

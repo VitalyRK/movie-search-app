@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import Dashboard from "../modules/layout/Dashboard";
+import Dashboard from "../components/ui/layout/Dashboard";
 import DetailPage from "../pages/detail-page/DetailPage";
 import NotFound from "../pages/not-found/NotFound";
 import SearchPage from "../pages/search-page/SearchPage";
@@ -11,11 +11,11 @@ export const routes = [
     element: <Dashboard />,
     children: [
       {
-        path: "/",
+        path: "/movies",
         element: <SearchPage />,
       },
       {
-        path: "/detail/:id",
+        path: "/movies/:id",
         element: <DetailPage />,
       },
       {

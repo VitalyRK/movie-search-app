@@ -112,3 +112,8 @@ export interface Result {
   published_at: string;
   id: string;
 }
+
+export interface MovieToLocal {
+  rate: number;
+  data: IMovieData | IMovieDetail;
+}

@@ -26,7 +26,7 @@ const NotFound = () => {
         <Text mt={48} mb={16} ta="center" size="24px" fw={600} lh={"24px"}>
           We can&#8217;t find the page you are looking for
         </Text>
-        <NavLink to={"/"}>
+        <NavLink to={"/movies"}>
           <PrimaryButton title="Go Home" />
         </NavLink>
       </Flex>

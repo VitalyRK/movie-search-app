@@ -1,13 +1,15 @@
 import { Image, TextInput } from "@mantine/core";
 import PrimaryButton from "../../ui/button/PrimaryButton";
-import SearchBar from "../../ui/search-bar/SearchBarWrapper";
 import { useSearchFormContext } from "../context/FormContext";
+import SearchBarWrapper from "../../ui/search-bar/SearchBarWrapper";
+import { useMediaQuery } from "@mantine/hooks";
 
 function SearchPanel() {
   const searchField = useSearchFormContext();
+  const isMobile = useMediaQuery(`(max-width: 560px)`);
 
   return (
-    <SearchBar title="Movies">
+    <SearchBarWrapper title="Movies">
       <TextInput
         {...searchField.getInputProps("searchField")}
         styles={{
@@ -30,10 +32,10 @@ function SearchPanel() {
           />
         }
         rightSection={<PrimaryButton title="Search" small submit />}
-        placeholder="Search movie title"
+        placeholder={isMobile ? "Search" : "Search movie title"}
         className="interactive__input"
       />
-    </SearchBar>
+    </SearchBarWrapper>
   );
 }
 

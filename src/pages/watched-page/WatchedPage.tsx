@@ -1,25 +1,19 @@
-import { useEffect, useState } from "react";
 import WatchedEmpty from "../../components/watched-empty/WatchedEmpty";
 import WatchedList from "../../components/watched-list/WatchedList";
-
-interface IWatchedList {
-  title: string;
-  year: number;
-  totalRate: number;
-  userRate: number;
-  poster: string;
-  genres: string[];
-}
+import { useRatedMovies } from "../../context/RatedContext";
 
 function WatchedPage() {
-  const [watchedList, setWatchedList] = useState<null | IWatchedList>(null);
+  const { ratedMovies } = useRatedMovies();
 
-  useEffect(() => {
-    let value = localStorage.getItem("watchedList") || null;
-    if (value) setWatchedList(JSON.parse(value));
-  }, []);
-
-  return <>{watchedList ? <WatchedEmpty /> : <WatchedList />}</>;
+  return (
+    <>
+      {ratedMovies && ratedMovies.length > 0 ? (
+        <WatchedList />
+      ) : (
+        <WatchedEmpty />
+      )}
+    </>
+  );
 }
 
 export default WatchedPage;

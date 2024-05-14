@@ -4,13 +4,24 @@ interface PrimaryButtonProps {
   title: string;
   small?: boolean;
   submit?: boolean;
+  onClick?: (query: string) => void;
+  query?: string;
 }
 
-const PrimaryButton = ({ title, small, submit }: PrimaryButtonProps) => {
+const PrimaryButton = ({
+  title,
+  small,
+  submit,
+  onClick,
+  query,
+}: PrimaryButtonProps) => {
   return (
     <Button
       className="primary__button"
       variant="filled"
+      onClick={
+        onClick && query !== undefined ? () => onClick(query) : undefined
+      }
       type={submit ? "submit" : "button"}
       style={
         small

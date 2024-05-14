@@ -1,8 +1,10 @@
 import { Flex, Text } from "@mantine/core";
+import { useHover } from "@mantine/hooks";
 
 interface StarProps {
   color: "inactive" | "user" | "overall";
-  rate: number;
+  rate: number | null;
+  openModal?: () => void;
 }
 
 const Colors = {
@@ -11,9 +13,25 @@ const Colors = {
   overall: "#FAB005",
 };
 
-const Star = ({ color, rate }: StarProps) => {
+const Star = ({ color, rate, openModal }: StarProps) => {
+  const { hovered, ref } = useHover();
+  const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
+    if (openModal !== undefined) openModal();
+  };
+
   return (
-    <Flex h={28} gap={4} align={"center"}>
+    <Flex
+      h={28}
+      gap={4}
+      align={"center"}
+      ref={ref}
+      style={{
+        cursor: color !== "overall" ? "pointer" : "default",
+        scale: hovered && color !== "overall" ? "1.15" : "none",
+      }}
+      onClick={openModal !== undefined ? handleClick : undefined}
+    >
       <svg
         width="28.000000"
         height="28.000000"
@@ -51,9 +69,11 @@ const Star = ({ color, rate }: StarProps) => {
           />
         </g>
       </svg>
-      <Text fw={600} lh={"20px"}>
-        {rate}
-      </Text>
+      {rate && (
+        <Text fw={600} lh={"20px"}>
+          {rate}
+        </Text>
+      )}
     </Flex>
   );
 };

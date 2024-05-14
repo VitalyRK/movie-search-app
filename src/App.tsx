@@ -5,11 +5,14 @@ import "@mantine/dates/styles.css";
 
 import { MantineProvider } from "@mantine/core";
 import { theme } from "./styles/theme";
+import { RatedProvider } from "./context/RatedContext";
 
 function App() {
   return (
     <MantineProvider theme={theme}>
-      <RouterProvider router={router} />
+      <RatedProvider>
+        <RouterProvider router={router} />
+      </RatedProvider>
     </MantineProvider>
   );
 }

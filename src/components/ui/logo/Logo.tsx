@@ -5,7 +5,7 @@ function Logo() {
   return (
     <Flex gap={12}>
       <Image src="/logo.svg" w={32} h={32} alt="Logo" />
-      <NavLink to={"/"}>
+      <NavLink to={"/movies"}>
         <Title
           order={2}
           c={"customColors.2"}

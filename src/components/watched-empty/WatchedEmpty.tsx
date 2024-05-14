@@ -1,5 +1,6 @@
-import { Button, Flex, Image, Text } from "@mantine/core";
+import { Flex, Image, Text } from "@mantine/core";
 import { NavLink } from "react-router-dom";
+import PrimaryButton from "../ui/button/PrimaryButton";
 
 const WatchedEmpty = () => {
   return (
@@ -19,8 +20,8 @@ const WatchedEmpty = () => {
       <Text ta="center" size="24px" fw={600} lh={"24px"}>
         You haven&#8217;t rated any films yet
       </Text>
-      <NavLink to={"/"}>
-        <Button>Find movies</Button>
+      <NavLink to={"/movies"}>
+        <PrimaryButton title="Find movies" />
       </NavLink>
     </Flex>
   );

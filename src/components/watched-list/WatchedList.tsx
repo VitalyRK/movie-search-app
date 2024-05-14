@@ -1,61 +1,109 @@
-import { Grid, Title } from "@mantine/core";
+import { Grid, TextInput, Image, Pagination } from "@mantine/core";
 import MovieCard from "../ui/movie-card/MovieCard";
-import { useEffect, useState } from "react";
-import { BASE_URL, FIXED_PARAMS_URL } from "../../helpers/constants";
-import { IMovieResults } from "../../helpers/types";
+import { useRatedMovies } from "../../context/RatedContext";
+import LoaderCenter from "../ui/loader/LoaderCenter";
+import PrimaryButton from "../ui/button/PrimaryButton";
+import SearchBarWrapper from "../ui/search-bar/SearchBarWrapper";
+import { useState } from "react";
+import { MovieToLocal } from "../../helpers/types";
+import NothingFound from "../ui/nothing-found/NothingFound";
+import { useMediaQuery } from "@mantine/hooks";
 
-interface WatchedListProps {
-  name?: string;
-}
+const WatchedList = () => {
+  const isMobile = useMediaQuery(`(max-width: 560px)`);
+  const { ratedMovies, isLoading, searchByTitle } = useRatedMovies();
+  const [query, setQuery] = useState("");
+  const [activePage, setPage] = useState(1);
+  const [searchMovies, setSearchMovies] = useState<MovieToLocal[] | null>(null);
 
-const WatchedList = ({}: WatchedListProps) => {
-  const [data, setData] = useState<IMovieResults | null>(null);
+  const numberForPagination = (activePage - 1) * 4;
 
-  useEffect(() => {
-    const url =
-      BASE_URL +
-      FIXED_PARAMS_URL +
-      `&page=1&sort_by=popularity.desc&with_genres=35&with_text_query=batman`;
-    const options = {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlYjRmMDAwYTA1YWEyMWIxOTE2ZjMwNmQ2NzRkZWZiMCIsInN1YiI6IjY2MzMyNzJjNjYxMWI0MDEyNzY2NTBjOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.H4dI5dJnhW5l5NgMtRzFysyXRKA9Aj5Aefn773isp3U",
-      },
-    };
-
-    fetch(url, options)
-      .then((res) => res.json())
-      .then((json) => {
-        setData(json);
-      })
-      .then(() => {})
-      .catch((err) => console.error("error:" + err));
-  }, []);
-
-  console.log(data);
+  const handleClick = (query: string) => {
+    setPage(1);
+    const result = searchByTitle(query);
+    setSearchMovies(result);
+  };
 
   return (
     <>
-      <Title order={1}>Watched movies</Title>
+      <SearchBarWrapper title="Watched movies">
+        <TextInput
+          styles={{
+            error: { position: "absolute", top: -20, left: 5 },
+          }}
+          w={{ base: 300, sm: 400, lg: 490 }}
+          h={55}
+          size="lg"
+          style={{
+            position: "relative",
+          }}
+          value={query}
+          onChange={(event) => setQuery(event.currentTarget.value)}
+          leftSection={
+            <Image
+              src={"./Search.svg"}
+              style={{
+                height: "18px",
+                width: "18px",
+              }}
+              alt="search icon"
+            />
+          }
+          rightSection={
+            <PrimaryButton
+              title="Search"
+              small
+              onClick={handleClick}
+              query={query}
+            />
+          }
+          placeholder={isMobile ? "Search" : "Search movie title"}
+          className="interactive__input"
+        />
+      </SearchBarWrapper>
 
-      <Grid gutter={{ base: "16px" }}>
-        {data && (
-          <Grid.Col span={{ base: 12, xl: 6 }}>
-            <MovieCard movie_data={data.results[0]} />
-          </Grid.Col>
+      <Grid style={{ gridTemplateRows: "1fr" }} gutter={{ base: "16px" }}>
+        {isLoading ? (
+          <LoaderCenter />
+        ) : (
+          ratedMovies &&
+          searchMovies === null &&
+          ratedMovies.map((movie, id) => {
+            if (id >= numberForPagination && id < numberForPagination + 4)
+              return (
+                <Grid.Col key={`card-${id}`} span={{ base: 12, xl: 6 }}>
+                  <MovieCard movie_data={movie.data} />
+                </Grid.Col>
+              );
+          }, [])
         )}
-        {/* <Grid.Col span={{ base: 12, xl: 6 }}>
-          <MovieCard name={"test"} />
-        </Grid.Col>
-        <Grid.Col span={{ base: 12, xl: 6 }}>
-          <MovieCard name={"test"} />
-        </Grid.Col>
-        <Grid.Col span={{ base: 12, xl: 6 }}>
-          <MovieCard name={"test"} />
-        </Grid.Col> */}
+        {searchMovies && searchMovies.length === 0 && <NothingFound />}
+        {searchMovies &&
+          searchMovies.map((movie, id) => {
+            if (id >= numberForPagination && id < numberForPagination + 4)
+              return (
+                <Grid.Col key={`card-${id}`} span={{ base: 12, xl: 6 }}>
+                  <MovieCard movie_data={movie.data} />
+                </Grid.Col>
+              );
+          }, [])}
       </Grid>
+      {ratedMovies && searchMovies === null && (
+        <Pagination
+          total={Math.ceil(ratedMovies.length / 4)}
+          value={activePage}
+          onChange={setPage}
+          size={isMobile ? "xs" : "sm"}
+        />
+      )}
+      {searchMovies && (
+        <Pagination
+          total={Math.ceil(searchMovies.length / 4)}
+          value={activePage}
+          onChange={setPage}
+          size={isMobile ? "xs" : "sm"}
+        />
+      )}
     </>
   );
 };

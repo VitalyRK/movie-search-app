@@ -3,9 +3,13 @@ import { useSearchFormContext } from "../context/FormContext";
 import { sortByList } from "../../../helpers/constants";
 
 import classes from "./index.module.css";
+import { useState } from "react";
+import ArrowDownIcon from "../../ui/arrow-down-icon/ArrowDownIcon";
+import ArrowUpIcon from "../../ui/arrow-up-icon/ArrowUpIcon";
 
 function SortPanel() {
   const form = useSearchFormContext();
+  const [isOpenSortPicker, setIsOpenSortPicker] = useState(false);
 
   return (
     <Select
@@ -25,6 +29,9 @@ function SortPanel() {
       defaultValue={sortByList[1].label}
       data={sortByList}
       allowDeselect={false}
+      onDropdownOpen={() => setIsOpenSortPicker(!isOpenSortPicker)}
+      onDropdownClose={() => setIsOpenSortPicker(!isOpenSortPicker)}
+      rightSection={!isOpenSortPicker ? <ArrowDownIcon /> : <ArrowUpIcon />}
       classNames={{ option: classes.option, input: classes.input }}
     />
   );

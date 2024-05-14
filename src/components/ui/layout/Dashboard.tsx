@@ -1,9 +1,9 @@
 import { Burger, Drawer, Flex, Stack } from "@mantine/core";
 import { Outlet } from "react-router-dom";
-import Logo from "../../components/ui/logo/Logo";
+import Logo from "../logo/Logo";
 import { useDisclosure } from "@mantine/hooks";
-import NavButton from "../../components/nav-menu/NavButton";
-import NavMenu from "../../components/nav-menu/NavMenu";
+import NavButton from "../../nav-menu/NavButton";
+import NavMenu from "../../nav-menu/NavMenu";
 
 function Dashboard() {
   const [opened, { open, close }] = useDisclosure();
@@ -11,7 +11,12 @@ function Dashboard() {
   return (
     <Flex mih={"100%"} m={"auto"} bg={"customColors.4"}>
       <Burger
-        style={{ position: "absolute", top: "20px", right: "20px" }}
+        style={{
+          zIndex: 150,
+          position: "absolute",
+          top: "20px",
+          right: "20px",
+        }}
         opened={opened}
         onClick={open}
         hiddenFrom="md"
@@ -26,7 +31,7 @@ function Dashboard() {
       >
         <Logo />
         <Stack gap={16} mt={80}>
-          <NavButton path="/" title="Movies" />
+          <NavButton path="/movies" title="Movies" />
           <NavButton path="/watched" title="Rated movies" />
         </Stack>
       </Stack>
