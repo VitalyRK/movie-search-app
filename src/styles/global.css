@@ -25,11 +25,11 @@ body {
   max-width: 100vw;
   height: 100dvh;
   overflow-x: hidden;
-  color: #232134;
+  color: var(--mantine-color-customColors-9);
 }
 
 ::selection {
-  background: #d1d5db;
+  background: var(--mantine-color-customColors-6);
 }
 
 a {
@@ -52,17 +52,17 @@ a {
 
 .active__nav__button button {
   font-weight: 700;
-  background-color: #E5D5FA;
-  color: #9854F6;
+  background-color: var(--mantine-color-purpleMain-1);
+  color: var(--mantine-color-purpleMain-4);
 }
 
 .inactive__nav__button button:hover {
-  color: #BD93F7;
+  color: var(--mantine-color-purpleMain-3);
 }
 
 .inactive__nav__button button:active {
-  background-color: #E5D5FA;
-  color: #9854F6;
+  background-color: var(--mantine-color-purpleMain-1);
+  color: var(--mantine-color-purpleMain-4);
 }
 
 /* ============ Reset buttons ============ */
@@ -72,11 +72,11 @@ a {
 }
 
 .interactive__button:hover {
-  color: #BD93F7;
+  color: var(--mantine-color-purpleMain-3);
 }
 
 .interactive__button:active {
-  color: #541F9D;
+  color: var(--mantine-color-purpleMain-5);
 }
 
 /* ============ Primary buttons ============ */
@@ -86,33 +86,33 @@ a {
 }
 
 .primary__button:hover {
-  background-color: #BD93F7;
+  background-color: var(--mantine-color-purpleMain-3);
 }
 
 .primary__button:active {
-  background-color: #541F9D;
+  background-color: var(--mantine-color-purpleMain-5);
 }
 
 /* ============ Search input ============ */
 .mantine-Input-input.mantine-MultiSelect-input,
 .interactive__input input {
-  border-color: #D5D6DC;
+  border-color: var(--mantine-color-customColors-6);
   transition: .3s ease;
 }
 
 .mantine-Input-input.mantine-MultiSelect-input:hover,
 .interactive__input input:hover {
-  border-color: #9854F6;
+  border-color: var(--mantine-color-purpleMain-4);
 }
 
 .mantine-Input-input.mantine-MultiSelect-input:focus,
 .interactive__input input:focus {
-  border-color: #9854F6;
+  border-color: var(--mantine-color-purpleMain-4);
 }
 
 .mantine-Input-input.mantine-MultiSelect-input:active,
 .interactive__input input:active {
-  border-color: #EAEBED;
+  border-color: var(--mantine-color-customColors-5);
 }
 
 .mantine-Pagination-control,
@@ -128,7 +128,7 @@ a {
 .mantine-YearPickerInput-calendarHeaderControl.mantine-UnstyledButton-root:hover,
 .mantine-YearPickerInput-calendarHeaderLevel.mantine-UnstyledButton-root:hover,
 .mantine-YearPickerInput-yearsListControl.mantine-PickerControl-pickerControl.mantine-UnstyledButton-root:hover {
-  color: #232134;
+  color: var(--mantine-color-customColors-9);
   background-color: var(--mantine-color-customColors-1);
 }
 
@@ -141,6 +141,11 @@ a {
 }
 
 [data-checked="true"] {
+  color: var(--mantine-color-customColors-0);
+  background-color: var(--mantine-color-purpleMain-filled);
+}
+
+[data-checked="true"]:hover {
   color: var(--mantine-color-customColors-0);
   background-color: var(--mantine-color-purpleMain-filled);
 }

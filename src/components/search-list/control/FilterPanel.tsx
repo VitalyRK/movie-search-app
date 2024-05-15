@@ -79,6 +79,7 @@ function FilterPanel({ onReset }: FilterPanelProps) {
         }}
         minDate={new Date(1925, 1)}
         maxDate={new Date(2030, 1)}
+        allowDeselect
         placeholder="Select release year"
         rightSection={!isOpenYearPicker ? <ArrowDownIcon /> : <ArrowUpIcon />}
         clearable

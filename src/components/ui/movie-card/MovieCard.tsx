@@ -72,7 +72,7 @@ const MovieCard = ({
           padding: isMobile ? "15px" : "24px",
           transition: ".3s ease",
           cursor: "pointer",
-          filter: hovered ? "brightness(0.9)" : "none",
+          filter: hovered ? "brightness(0.98)" : "none",
           position: "relative",
         }}
         onClick={() => navigate(`../movies/${id}`)}
