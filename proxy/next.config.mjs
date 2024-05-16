@@ -15,7 +15,7 @@ const nextConfig = {
       },
       {
         source: '/detail/:id',
-        destination: `https://api.themoviedb.org/3/movie/823464:id?api_key=${API_KEY}&append_to_response=videos&language=en-US`,
+        destination: `https://api.themoviedb.org/3/movie/:id?api_key=${API_KEY}&append_to_response=videos&language=en-US`,
       },
       {
         source: '/img/sm/:path',
