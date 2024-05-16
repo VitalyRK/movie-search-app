@@ -1,5 +1,7 @@
 const BASE_URL = "https://api.themoviedb.org/3/";
 
+const API_KEY = process.env.API_KEY;
+
 const FIXED_PARAMS_URL =
   "discover/movie?include_adult=false&include_video=false&language=en-US";
 
@@ -9,19 +11,19 @@ const nextConfig = {
     return [
       {
         source: '/movies',
-        destination: 'https://api.themoviedb.org/3/discover/movie?api_key=eb4f000a05aa21b1916f306d674defb0&include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc',
+        destination: `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc`,
       },
       {
-        source: '/cats',
-        destination: 'https://meowfacts.herokuapp.com',
+        source: '/detail/:id',
+        destination: `https://api.themoviedb.org/3/movie/823464:id?api_key=${API_KEY}&append_to_response=videos&language=en-US`,
       },
       {
-        source: '/img',
-        destination: 'http://image.tmdb.org/t/p/w154/z1p34vh7dEOnLDmyCrlUVLuoDzd.jpg',
+        source: '/img/sm/:path',
+        destination: 'http://image.tmdb.org/t/p/w154/:path',
       },
       {
-        source: '/ducks',
-        destination: 'https://random-d.uk/api/random',
+        source: '/img/md/:path',
+        destination: 'http://image.tmdb.org/t/p/w342/:path',
       },
     ];
   }
