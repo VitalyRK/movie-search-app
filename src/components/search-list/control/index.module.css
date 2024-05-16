@@ -1,0 +1,16 @@
+.input.input:hover {
+  border-color: var(--mantine-color-purpleMain-filled);
+}
+
+.option.option {
+  transition: .05s ease;
+}
+
+.option.option:hover {
+  background-color: var(--mantine-color-customColors-1);
+}
+
+.option.option:active {
+  color: var(--mantine-color-customColors-0);
+  background-color: var(--mantine-color-purpleMain-filled);
+}

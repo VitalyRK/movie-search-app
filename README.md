@@ -1,2 +1,5 @@
-# movie-search-app
-Search for movies
+# Search Movie App
+
+Search for movies test task
+
+Stack: **React**, **Mantine** library
