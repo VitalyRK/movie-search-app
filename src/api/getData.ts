@@ -15,6 +15,8 @@ export const getMovies = async ({
   const textVoteGte = `/${voteAverageGte}` ?? "";
   const textVoteLte = `/${voteAverageLte}` ?? "";
 
+  console.log(textQuery, textGenres, textYear, textVoteGte, textVoteLte);
+
   const response = await fetch(
     `https://movie-search-app-sage-two.vercel.app/movies/${
       page ?? 1
