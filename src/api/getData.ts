@@ -23,7 +23,7 @@ export const getMovies = async ({
   const response = await fetch(
     `https://movie-search-app-sage-two.vercel.app/movies/${
       page ?? 1
-    }${textYear}sort_by=${sortBy}/${textQuery}${textVoteGte}${textVoteLte}${textGenres}/`
+    }/${textYear}sort_by=${sortBy}${textQuery}${textVoteGte}${textVoteLte}${textGenres}/`
   );
 
   const data = await response.json();
