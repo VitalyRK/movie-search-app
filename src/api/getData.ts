@@ -20,34 +20,17 @@ export const getMovies = async ({
     ? `&vote_average.lte=${voteAverageLte}`
     : "";
 
-  // const url =
-  //   BASE_URL +
-  //   FIXED_PARAMS_URL +
-  //   `&page=${
-  //     page ?? 1
-  //   }${textYear}&sort_by=${sortBy}${textQuery}${textVoteGte}${textVoteLte}${textGenres}`;
-
   const response = await fetch(
     `https://movie-search-app-sage-two.vercel.app/movies/${
       page ?? 1
-    }${textYear}sort_by=${sortBy}${textQuery}${textVoteGte}${textVoteLte}${textGenres}/`
+    }${textYear}sort_by=${sortBy}/${textQuery}${textVoteGte}${textVoteLte}${textGenres}/`
   );
-  // const response = await fetch(url, {
-  //   method: "GET",
-  //   headers: {
-  //     accept: "application/json",
-  //     Authorization:
-  //       "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlYjRmMDAwYTA1YWEyMWIxOTE2ZjMwNmQ2NzRkZWZiMCIsInN1YiI6IjY2MzMyNzJjNjYxMWI0MDEyNzY2NTBjOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.H4dI5dJnhW5l5NgMtRzFysyXRKA9Aj5Aefn773isp3U",
-  //   },
-  // });
 
   const data = await response.json();
   return data;
 };
 
 export const getMovieById = async (id: number) => {
-  // https://movie-search-app-sage-two.vercel.app/movies/
-  // https://movie-search-app-sage-two.vercel.app/details/967847/
   const response = await fetch(
     `https://movie-search-app-sage-two.vercel.app/details/${id}/`
   );

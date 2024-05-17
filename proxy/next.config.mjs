@@ -11,7 +11,7 @@ const nextConfig = {
       },
       {
         source: '/movies/:page/:fiters',
-        destination: `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&include_adult=false&include_video=false&language=en-US&page=:page&:fiters/`, //sort_by=popularity.desc
+        destination: `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&include_adult=false&include_video=false&language=en-US&page=:page&:fiters/`,
       },
       {
         source: '/details/:id/',
