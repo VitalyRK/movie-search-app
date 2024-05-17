@@ -9,21 +9,16 @@ export const getMovies = async ({
   sortBy,
   page,
 }: IGetMoviesProps): Promise<IMovieResults> => {
-  const textQuery = searchField ? `&with_text_query=${searchField}` : "";
-  const textGenres =
-    genres && genres?.length >= 1 ? `&with_genres=${genres.join("%2C")}` : "";
-  const textYear = release ? `&primary_release_year=${release}` : "";
-  const textVoteGte = voteAverageGte
-    ? `&vote_average.gte=${voteAverageGte}`
-    : "";
-  const textVoteLte = voteAverageLte
-    ? `&vote_average.lte=${voteAverageLte}`
-    : "";
+  const textQuery = searchField ?? "";
+  const textGenres = genres && genres?.length >= 1 ? genres.join("%2C") : "";
+  const textYear = release ?? "";
+  const textVoteGte = voteAverageGte ?? "";
+  const textVoteLte = voteAverageLte ?? "";
 
   const response = await fetch(
     `https://movie-search-app-sage-two.vercel.app/movies/${
       page ?? 1
-    }/${textYear}&sort_by=${sortBy}${textQuery}${textVoteGte}${textVoteLte}${textGenres}/`
+    }/${textYear}/${sortBy}/${textQuery}/${textVoteGte}/${textVoteLte}/${textGenres}/`
   );
 
   const data = await response.json();
