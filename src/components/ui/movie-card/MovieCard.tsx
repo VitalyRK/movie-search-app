@@ -9,7 +9,7 @@ import {
   Box,
 } from "@mantine/core";
 import Star from "../star/Star";
-import { IMAGES_BASE_URL, genresList } from "../../../helpers/constants";
+import { genresList } from "../../../helpers/constants";
 import { IMovieData, IMovieDetail, MovieToLocal } from "../../../helpers/types";
 import { useNavigate } from "react-router-dom";
 import { formatVotes, instanceOfMine } from "../../../helpers/helper-functions";
@@ -86,7 +86,7 @@ const MovieCard = ({
           <Image
             src={
               poster_path
-                ? IMAGES_BASE_URL + "w154/" + poster_path
+                ? `https://movie-search-app-sage-two.vercel.app/img/sm/${poster_path}`
                 : "./no-poster.png"
             }
             height={"100%"}
