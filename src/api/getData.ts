@@ -9,16 +9,16 @@ export const getMovies = async ({
   sortBy,
   page,
 }: IGetMoviesProps): Promise<IMovieResults> => {
-  const textQuery = searchField ?? "";
+  const textQuery = `/${searchField}` ?? "";
   const textGenres = genres && genres?.length >= 1 ? genres.join("%2C") : "";
-  const textYear = release ?? "";
-  const textVoteGte = voteAverageGte ?? "";
-  const textVoteLte = voteAverageLte ?? "";
+  const textYear = `/${release}` ?? "";
+  const textVoteGte = `/${voteAverageGte}` ?? "";
+  const textVoteLte = `/${voteAverageLte}` ?? "";
 
   const response = await fetch(
     `https://movie-search-app-sage-two.vercel.app/movies/${
       page ?? 1
-    }/${textYear}/${sortBy}/${textQuery}/${textVoteGte}/${textVoteLte}/${textGenres}/`
+    }/${sortBy}/`
   );
 
   const data = await response.json();
