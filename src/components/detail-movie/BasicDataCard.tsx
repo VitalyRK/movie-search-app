@@ -7,6 +7,7 @@ import { IMovieDetail, MovieToLocal } from "../../helpers/types";
 import { useDisclosure } from "@mantine/hooks";
 import StyledModal from "../ui/styled-modal/StyledModal";
 import { useRatedMovies } from "../../context/RatedContext";
+import { IMAGES_BASE_URL } from "../../helpers/constants";
 
 interface BasicDataCardProps {
   props: IMovieDetail;
@@ -61,7 +62,7 @@ const BasicDataCard = ({
           <Image
             src={
               poster_path
-                ? `https://movie-search-app-sage-two.vercel.app/img/md/${poster_path}`
+                ? IMAGES_BASE_URL + "w342/" + poster_path
                 : "../no-poster-lg.png"
             }
             height={"100%"}

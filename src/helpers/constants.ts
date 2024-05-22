@@ -1,3 +1,8 @@
+export const BASE_URL = "https://api.themoviedb.org/3/";
+
+export const FIXED_PARAMS_URL =
+  "discover/movie?include_adult=false&include_video=false&language=en-US";
+
 export const IMAGES_BASE_URL = "https://image.tmdb.org/t/p/";
 
 export const LIMIT_OF_RATES = 10;

@@ -1,12 +1,19 @@
 import { Burger, Drawer, Flex, Stack } from "@mantine/core";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../logo/Logo";
 import { useDisclosure } from "@mantine/hooks";
 import NavButton from "../../nav-menu/NavButton";
 import NavMenu from "../../nav-menu/NavMenu";
+import { useEffect } from "react";
 
 function Dashboard() {
   const [opened, { open, close }] = useDisclosure();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (location.pathname === '/') return navigate('/movies');
+  }, [])
 
   return (
     <Flex mih={"100%"} m={"auto"} bg={"customColors.4"}>
