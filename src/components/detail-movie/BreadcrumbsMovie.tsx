@@ -16,7 +16,7 @@ function BreadcrumbsMovie({ original_title, idParam }: BreadcrumbsMovieProps) {
       maw={{ base: "300px" }}
     >
       {[
-        { title: "Movies", href: "/movies" },
+        { title: "Movies", href: "/" },
         { title: original_title ?? idParam!, href: `/movies/${idParam}` },
       ].map((item, index) => (
         <Anchor fz={14} href={item.href} key={index}>
