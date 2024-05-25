@@ -25,7 +25,7 @@ export const routes = [
     ],
   },
   {
-    path: "*",
+    path: "/*",
     element: <NotFound />,
   },
 ];
