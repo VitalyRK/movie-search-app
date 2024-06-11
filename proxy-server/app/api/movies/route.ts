@@ -3,5 +3,5 @@ export async function POST(request: Request) {
 
   console.log(body);
 
-  return new Response("OK");
+  return new Response("OK.");
 }
