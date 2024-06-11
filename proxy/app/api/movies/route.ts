@@ -6,6 +6,6 @@ export async function POST(request: Request) {
   return new Response("OK.");
 }
 
-export async function GET(request: Request) {
+export async function GET() {
   return new Response("OK!");
 }

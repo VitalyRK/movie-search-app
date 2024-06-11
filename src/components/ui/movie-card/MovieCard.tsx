@@ -86,7 +86,7 @@ const MovieCard = ({
           <Image
             src={
               poster_path
-                ? IMAGES_BASE_URL + "w154/" + poster_path
+                ? IMAGES_BASE_URL + "sm/" + poster_path
                 : "./no-poster.png"
             }
             height={"100%"}

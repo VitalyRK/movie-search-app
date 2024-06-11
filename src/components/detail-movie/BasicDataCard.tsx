@@ -62,7 +62,7 @@ const BasicDataCard = ({
           <Image
             src={
               poster_path
-                ? IMAGES_BASE_URL + "w342/" + poster_path
+                ? IMAGES_BASE_URL + "md/" + poster_path
                 : "../no-poster-lg.png"
             }
             height={"100%"}
