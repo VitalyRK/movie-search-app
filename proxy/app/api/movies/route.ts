@@ -5,3 +5,7 @@ export async function POST(request: Request) {
 
   return new Response("OK.");
 }
+
+export async function GET(request: Request) {
+  return new Response("OK!");
+}
